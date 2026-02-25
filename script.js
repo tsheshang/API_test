@@ -1,37 +1,63 @@
-document.getElementById("getWeather").onclick = fetchWeatherData;
+$(document).ready(onPageLoad);
 
-function fetchWeatherData() {
+function onPageLoad() {
+    var apiKey = "686f35ad8c434c5f9f7120343262302";
 
-    var cityName = document.getElementById("city").value;
-    var apiKey = "YOUR_API_KEY_HERE";
+    $("#searchBtn").click(onSearchClick);
 
-    var requestUrl = "http://api.weatherapi.com/v1/current.json/q"
-        + cityName + "&appid=" + apiKey + "&units=metric";
-
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (weatherData) {
-            displayWeatherData(weatherData);
-        })
-        .catch(function () {
-            showErrorMessage();
-        });
+    function onSearchClick() {
+        getWeather(apiKey);
+    }
 }
 
-function displayWeatherData(weatherData) {
+function getWeather(apiKey) {
 
-    var temperature = weatherData.main.temp;
-    var weatherCondition = weatherData.weather[0].description;
+    console.log("Button clicked");
 
-    document.getElementById("result").innerHTML =
-        "Temperature: " + temperature + "°C <br>" +
-        "Condition: " + weatherCondition;
+    var city = $("#cityInput").val().trim();
+
+    if (city === "") {
+        showMessage("Please enter a city");
+        return;
+    }
+
+    var url = buildApiUrl(apiKey, city);
+
+    showMessage("Loading...");
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: onApiSuccess,
+        error: onApiError
+    });
 }
 
-function showErrorMessage() {
+function buildApiUrl(apiKey, city) {
+    return "https://api.weatherapi.com/v1/current.json?key="
+        + apiKey + "&q=" + city + "&aqi=no";
+}
 
-    document.getElementById("result").innerHTML =
-        "City not found ";
+function onApiSuccess(data) {
+
+    console.log("API SUCCESS");
+    console.log(data);
+
+    $("#temperature").text(data.current.temp_c + "°C");
+    $("#condition").text(data.current.condition.text);
+    $("#humidity").text("Humidity: " + data.current.humidity + "%");
+    $("#wind").text("Wind: " + data.current.wind_kph + " kph");
+    $("#weatherIcon").attr("src", "https:" + data.current.condition.icon);
+}
+
+function onApiError(err) {
+
+    console.log("API ERROR");
+    console.log(err);
+
+    showMessage("City not found");
+}
+
+function showMessage(message) {
+    $("#condition").text(message);
 }
