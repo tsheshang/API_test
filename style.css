@@ -1,52 +1,133 @@
+/* style.css – all styles from your description */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: url('https://images.unsplash.com/photo-1501630834273-4b5604d2ee31') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1501630834273-4b5604d2ee31') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
-    background: rgba(255,255,255,0.8);
-    width: 400px;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  width: 420px;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 20px;
+  cursor: pointer;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #357abd;
+}
+
+button.danger {
+  background: #e24a4a;
+}
+
+button.danger:hover {
+  background: #bd3535;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  min-height: 18px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.role-badge {
+  background: #4a90e2;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
 }
 
 .search {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .search input {
-    padding: 8px;
-    width: 65%;
+  padding: 8px;
+  width: 65%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .search button {
-    padding: 8px 12px;
-    cursor: pointer;
+  padding: 8px 12px;
 }
 
 .weather-info img {
-    width: 100px;
+  width: 100px;
 }
 
 .bottom {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .temp p {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
 }
+
+#adminSection {
+  margin-top: 15px;
+}
+
+a {
+  color: #4a90e2;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.mt-2 { margin-top: 8px; }
+.flex { display: flex; align-items: center; gap: 6px; justify-content: center; }
+.text-muted { color: #555; font-size: 12px; }
+.border-top { border-top: 1px solid #ddd; padding-top: 10px; margin-top: 12px; }

@@ -1,45 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Weather Forecast</title>
-    <link rel="stylesheet" href="style.css">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Dashboard · Auth demo</title>
+  <!-- Font Awesome (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- external CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="appCard">
 
+  <!-- ===== LOGIN CARD ===== -->
+  <div id="loginCard">
+    <h2><i class="fas fa-cloud-sun"></i> Login</h2>
+    <div class="form-group">
+      <input type="email" id="loginEmail" placeholder="Email" value="user@example.com" />
+    </div>
+    <div class="form-group">
+      <input type="password" id="loginPassword" placeholder="Password" value="password123" />
+    </div>
+    <button id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <div id="loginError" class="error"></div>
+    <p class="mt-2">Don't have an account? <a id="showRegister">Register</a></p>
+    <div class="border-top text-muted">
+      <i class="fas fa-info-circle"></i> Demo: user@example.com / password123
+    </div>
+  </div>
+
+  <!-- ===== REGISTER CARD ===== -->
+  <div id="registerCard" style="display:none;">
+    <h2><i class="fas fa-user-plus"></i> Register</h2>
+    <div class="form-group">
+      <input type="email" id="registerEmail" placeholder="Email" value="new@user.com" />
+    </div>
+    <div class="form-group">
+      <input type="password" id="registerPassword" placeholder="Password" value="pass123" />
+    </div>
+    <div class="form-group">
+      <select id="registerRole">
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
+      </select>
+    </div>
+    <button id="registerBtn"><i class="fas fa-user-plus"></i> Register</button>
+    <div id="registerError" class="error"></div>
+    <p class="mt-2">Already have an account? <a id="showLogin">Login</a></p>
+  </div>
+
+  <!-- ===== WEATHER CARD (logged in) ===== -->
+  <div id="weatherCard" style="display:none;">
     <div class="top">
-        <h1>Weather Forecast</h1>
-        <div class="date" id="date"></div>
+      <span id="date"><i class="far fa-calendar-alt"></i> —</span>
+      <button class="danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="user-info">
+      <span><i class="fas fa-user"></i> <span id="userEmail">—</span></span>
+      <span class="role-badge" id="userRole">—</span>
     </div>
 
     <div class="search">
-        <input type="text" id="cityInput" placeholder="Enter location">
-        <button id="searchBtn">Search</button>
+      <input type="text" id="cityInput" placeholder="Enter city" value="London" />
+      <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
     </div>
 
     <div class="weather-info">
-        <img id="weatherIcon" src="" alt="">
-        <h2 id="condition"></h2>
-    </div>
-
-    <div class="bottom">
+      <img id="weatherIcon" src="https://cdn.weatherbit.io/static/img/icons/t01d.png" alt="weather icon" />
+      <div class="bottom">
         <div class="temp">
-            <h3>Temperature</h3>
-            <p id="temperature"></p>
+          <p id="temperature">--°C</p>
         </div>
-
-        <div class="extra">
-            <p id="humidity"></p>
-            <p id="wind"></p>
+        <div style="text-align: left;">
+          <div id="condition">Search for a city</div>
+          <div id="humidity">Humidity: --%</div>
+          <div id="wind">Wind: -- kph</div>
         </div>
+      </div>
     </div>
+
+    <!-- Admin section (visible only for Admin) -->
+    <div id="adminSection" style="display:none;">
+      <hr />
+      <p><i class="fas fa-shield-alt" style="color: #e24a4a;"></i> <strong>Admin panel</strong></p>
+      <p style="font-size: 13px; color: #333;">👑 You have admin privileges.</p>
+      <button class="danger" style="background: #6c757d;" onclick="alert('Admin action: users list would appear here.')">
+        <i class="fas fa-users-cog"></i> Manage users
+      </button>
+    </div>
+  </div>
 
 </div>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- external JavaScript -->
 <script src="script.js"></script>
 </body>
 </html>
